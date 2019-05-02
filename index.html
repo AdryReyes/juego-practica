@@ -42,16 +42,18 @@ var gameOver = false;
 var scoreText;
 var key1;
 var yuna;
+var musica;
 
 var game = new Phaser.Game(config);
 
 function preload ()
 {
+    this.load.audio('musica','assets/ffxboss.mp3');
     this.load.image('sky', 'assets/ff logo.png');
     this.load.image('ground', 'assets/platform.png');
     this.load.image('star', 'assets/gil.png');
     this.load.image('bomb', 'assets/bomba.png');
-    this.load.image('yuna', 'assets/yuna.png', { frameWidth: 36, frameHeight: 48 });
+    this.load.image('yuna', 'assets/yuna.png');
     this.load.spritesheet('Tidus', 'assets/Tidus.png', { frameWidth: 36, frameHeight: 48 });
 }
 
@@ -132,10 +134,12 @@ function create ()
     this.physics.add.overlap(player, stars, collectStar, null, this);
 
     this.physics.add.collider(player, bombs, hitBomb, null, this);
+    
+    //Sonidos//
+    musica = this.sound.play('musica', false, 1, 1, 0, 0, true);
+    
 
-   
-}
-
+}  
 function update ()
 {
     if (gameOver)
@@ -186,6 +190,9 @@ function update ()
     }
   
     
+}
+function render() {
+    this.debug.soundInfo(audio, 20, 32);
 }
 
 
